@@ -20,7 +20,7 @@ def processTags(qtags):
 
 
 count = 0
-with open("/home/abhisid/Documents/Queries.csv", encoding="UTF-8") as f_obj:
+with open("/home/hacker29/SEM-4/CS299/final/QueryResult1.csv", encoding="UTF-8") as f_obj:
     csvFile = csv.reader(f_obj)
     for line in csvFile:
         try:
