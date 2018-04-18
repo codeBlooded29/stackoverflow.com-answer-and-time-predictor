@@ -1,30 +1,35 @@
-import csv
+#preprocessing generated dataset from dataset.stackexchange
+#in format suitable for feature extraction
+
+import csv #importing necessary libraries
 import re
 import pickle
 
-data = []
+dataset = []
 
-
-def cleanHTML(raw_html):
+def cleanHTML(raw_html): #function to remove HTML chars from the raw dataset
     cleanr = re.compile('<.*?>')
-    cleanText = re.sub(cleanr, '', raw_html)
+    cleanText = re.sub(cleanr, '', raw_html) #removing html chars with null char
     return cleanText
 
 
 def processTags(qtags):
-    charToRemove = "<>"
+    charToRemove = "<>" #removing angular brackets from question tags
     for char in qtags:
         if char in charToRemove:
             qtags = qtags.replace(char, ' ')
     return qtags
 
 
-count = 0
-with open("/home/hacker29/SEM-4/CS299/final/QueryResult1.csv", encoding="UTF-8") as f_obj:
+count = 0 #transforming raw dataset in usable dataset
+#count1 = 0
+count2 = 0
+with open("/home/btech/siddharth.cs16/RawDataSet/QueryResultsF.csv", encoding="UTF-8") as f_obj:
     csvFile = csv.reader(f_obj)
     for line in csvFile:
         try:
-            qId = int(line[0])
+            qId = int(line[0]) #following info we have
+            #count2+=1          count2 is the no. of questions with Ids i.e. the total no. of questions.
             acceptAnsId = int(line[1])
             qScore = int(line[3])
             qViewCount = int(line[4])
@@ -38,26 +43,29 @@ with open("/home/hacker29/SEM-4/CS299/final/QueryResult1.csv", encoding="UTF-8")
             answererReputation = int(line[22])
             answererUpvotes = int(line[23])
             answererDownvotes = int(line[24])
-            if acceptAnsId < 900001:
-                data.append(
+            if acceptAnsId < 1500001:    #acceptAnsId may or may not be below 1500001
+                dataset.append(
                     {'qId': qId, 'acceptAnsID': acceptAnsId, 'qScore': qScore, 'qViewCount': qViewCount,
                      'qBody': qBody, 'qTitle': qTitle, 'qTags': qTags, 'answerId': answerId,
                      'answerScore': answerScore, 'answerBody': answerBody, 'answerCommCount': answerCommCount,
                      'answererReputation': answererReputation, 'answererUpvotes': answererUpvotes,
                      'answererDownvotes': answererDownvotes})
-            count = count + 1
+            count = count + 1   #count is the no. of questions with acceptedAnsId not being null and not necessarily below 1500001
             if count % 10000 == 0:
                 print(count)
         except ValueError:
             pass
 
+#print(count)
+dataset = sorted(dataset, key=lambda k: k['qId'])
 
-data = sorted(data, key=lambda k: k['qId'])
+print('\nDataset Sorted\n')
+#print(count2)
 
-print('data sorted')
+with open('dataset', 'wb') as fp: #dumping created dataset
+    pickle.dump(dataset, fp)
 
-with open('dataset', 'wb') as fp:
-    pickle.dump(data, fp)
-
-print(len(data))
-print('Successful')
+print(len(dataset))        #len(dataset) is the dataset-length satisfying both non-empty criteria and acceptedAnsId criteria.
+#print("QCount = ",count1)
+print('\nDataset Preprocessing Successful\n')
+#end of PA_Dataset.py
