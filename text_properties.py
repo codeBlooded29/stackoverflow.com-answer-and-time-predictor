@@ -1,3 +1,4 @@
+#importing importatnt libraries
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import re
@@ -7,9 +8,15 @@ from textblob import TextBlob
 from rake_nltk import Rake
 
 
-class TextProperties:
+class TextProperties: #Utitlity class to get properties of text as a whole
+
+    @staticmethod 
+    def subjective(text): #getting subjectivity
+        sub = TextBlob(text).sentiment.subjectivity
+        return sub
+
     @staticmethod
-    def NonstopWords(text):
+    def NonstopWords(text): #getting nonstop words
         text = re.sub(r'[^\w\s]', ' ', text)
         stop_words = set(stopwords.words('english'))
         word_tokens = word_tokenize(text)
@@ -20,14 +27,14 @@ class TextProperties:
         return len(filtered_sentence)
 
     @staticmethod
-    def UniqueWords(text):
+    def UniqueWords(text): #getting uniquewords
         text = re.sub(r'[^\w\s]', ' ', text)
         c = Counter(text.split())
         c = set(c)
         return len(c)
 
     @staticmethod
-    def spellcheck(text):
+    def spellcheck(text): #getting spellcheck
         chkr = SpellChecker("en_US")
         chkr.set_text(text)
         c = 0
@@ -35,12 +42,7 @@ class TextProperties:
             c = c + 1
         return c
 
-    @staticmethod
-    def subjective(text):
-        sub = TextBlob(text).sentiment.subjectivity
-        return sub
-
-    @staticmethod
+    @staticmethod #getting relevancy between answerBody, questionBody, and questionTag
     def relevancy(answer, qBody, qTags):
         r = Rake()
         r.extract_keywords_from_text(answer)
