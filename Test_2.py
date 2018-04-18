@@ -4,20 +4,23 @@ import numpy as np
 from sklearn.externals import joblib
 
 
-with open('features_train', 'rb') as fp:
-    features_train = pickle.load(fp)
-with open('labels_train', 'rb') as fp:
-    labels_train = pickle.load(fp)
+with open('features_test1', 'rb') as fp:
+    features_test = pickle.load(fp)
+with open('labels_test1', 'rb') as fp:
+    labels_test = pickle.load(fp)
 
-print(len(features_train))
-print(len(labels_train))
-x = np.array(features_train)
-y = np.array(labels_train)
+print(len(features_test))
+print(len(labels_test))
+
+X_test = np.array(features_test)
+y_test = np.array(labels_test)
+
 clf = tree.DecisionTreeClassifier()
-clf.fit(x,y)
+clf = joblib.load('trained_2.pkl')
 
-joblib.dump(clf,'trained_2.pkl')
-print('successful')
+res = clf.predict(X_test)
 
-res = clf.score(x,y)
-print(res)
+#print(res.tolist().count(1))
+#print(labels_test.count(1))
+print(clf.score(X_test,y_test))
+print("Testing Successful!")
