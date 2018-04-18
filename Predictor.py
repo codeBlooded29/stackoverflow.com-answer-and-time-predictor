@@ -10,8 +10,8 @@ from sklearn.naive_bayes import GaussianNB
 
 # Taking input question and its body
 
-inputQuestion = input("\nWelcome to StackOverFlow Answer Predictor! Please enter a technical question title ->\n")
-inputQuestionBody = input("Please enter a technical question Body ->\n")
+inputQuestion = input("\nWelcome to StackOverFlow Answer Predictor! Please enter a technical question ->\n")
+inputQuestionBody = input("Please enter some more details (a paragraph! as a question body)->\n")
 
 
 with open('dataset', 'rb') as fp:
