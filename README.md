@@ -38,7 +38,7 @@ The features of a good answer considered by us are:-
 ● ***Answer Downvotes*** 
 ● ***Answerer Reputation*** 
 ● ***Answer Comment Count*** 
-● ***Readability consensus of answer ***
+● ***Readability consensus of answer***
 
 To reproduce the work run these Python scripts in order-<br/>
 ```
