@@ -27,7 +27,7 @@ The overall aim of a project is to have an idea of what could be possible
 answer on ​ stackoverflow.com​ . 
 
 The features of a good answer considered by us are:-
-● ***Non-Stopwords 
+● ***Non-Stopwords*** 
 ● No. of occurences of a word in given text. 
 ● Relevance between the answerBody, questionBody and questionTags. 
 ● Information provided by the data 
