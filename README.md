@@ -40,8 +40,8 @@ The features of a good answer considered by us are:-
 ● Answer Comment Count 
 ● Readability consensus of answer 
 
-To reproduce the work run these Python scripts in order-
-'''
+To reproduce the work run these Python scripts in order-<br/>
+```
  ~$ python3 csvDatasetPreprocessing.py #Preprocess CSV Dataset
  
  ~$ python3 FeatureVectorsGeneration.py #generate the feature vectors
@@ -53,4 +53,4 @@ To reproduce the work run these Python scripts in order-
  ~$ TFIDF_util.py #To create tf-idf vector space of questions title and body for similarity matching
  
  ~$ Predictor.py #To finally input a prospective Stackoverflow.com question and get apt answers
-'''
+```
